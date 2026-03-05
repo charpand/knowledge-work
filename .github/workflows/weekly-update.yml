@@ -1,0 +1,97 @@
+---
+name: Weekly Update Check
+
+on:
+  schedule:
+    # Run every Monday at 09:00 UTC
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check-for-updates:
+    name: Check and Update Content
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for stale content
+        id: stale-check
+        run: |
+          STALE_THRESHOLD_DAYS=90
+          STALE_FILES=""
+
+          while IFS= read -r -d '' file; do
+            last_modified=$(git log -1 --format="%ct" -- "$file" 2>/dev/null)
+            if [ -z "$last_modified" ]; then
+              continue
+            fi
+            now=$(date +%s)
+            age_days=$(( (now - last_modified) / 86400 ))
+            if [ "$age_days" -gt "$STALE_THRESHOLD_DAYS" ]; then
+              STALE_FILES="${STALE_FILES}${file} (${age_days} days old)\n"
+            fi
+          done < <(find . -name "*.md" -not -path "./.git/*" -print0)
+
+          if [ -n "$STALE_FILES" ]; then
+            echo "stale=true" >> "$GITHUB_OUTPUT"
+            printf "%b" "$STALE_FILES" > /tmp/stale_files.txt
+            echo "Stale files found:"
+            cat /tmp/stale_files.txt
+          else
+            echo "stale=false" >> "$GITHUB_OUTPUT"
+            echo "No stale files found."
+          fi
+
+      - name: Update stale content timestamp marker
+        if: steps.stale-check.outputs.stale == 'true'
+        run: |
+          BRANCH="chore/weekly-update-$(date +%Y-%m-%d)"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+
+          # Append a "Last reviewed" footer to each stale file
+          while IFS= read -r line; do
+            file=$(echo "$line" | awk '{print $1}')
+            if [ -f "$file" ]; then
+              # Update or add a last-reviewed marker at the end of the file
+              if grep -q "^<!-- last-reviewed:" "$file"; then
+                sed -i "s|^<!-- last-reviewed:.*-->|<!-- last-reviewed: $(date +%Y-%m-%d) -->|" "$file"
+              else
+                printf '\n<!-- last-reviewed: %s -->\n' "$(date +%Y-%m-%d)" >> "$file"
+              fi
+              git add "$file"
+            fi
+          done < /tmp/stale_files.txt
+
+          git commit -m "chore: weekly review timestamp update $(date +%Y-%m-%d)"
+          git push origin "$BRANCH"
+          echo "BRANCH=$BRANCH" >> "$GITHUB_ENV"
+
+      - name: Create pull request for stale content
+        if: steps.stale-check.outputs.stale == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          STALE_LIST=$(cat /tmp/stale_files.txt)
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "chore: weekly content review $(date +%Y-%m-%d)" \
+            --body "## Weekly Content Review
+
+          The following files have not been updated in over 90 days and may need review:
+
+          \`\`\`
+          ${STALE_LIST}
+          \`\`\`
+
+          Please review these files and update them as needed.
+          The \`last-reviewed\` timestamp has been refreshed automatically." \
+            --reviewer charpand
