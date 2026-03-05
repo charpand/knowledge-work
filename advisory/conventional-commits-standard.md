@@ -6,13 +6,13 @@ This document establishes the standard for commit messages across all repositori
 
 ## Standard Reference
 
-This organization follows the Conventional Commits specification as documented at https://sawin.com.np/blog/conventional-commits and the broader Conventional Commits standard (https://www.conventionalcommits.org/).
+This organization follows the Conventional Commits specification as documented at <https://sawin.com.np/blog/conventional-commits> and the broader Conventional Commits standard (<https://www.conventionalcommits.org/>).
 
 ## Required Format
 
 All commits must follow this structure:
 
-```
+```text
 <type>(<scope>): <subject>
 
 <body>
@@ -69,13 +69,13 @@ The footer is optional. Common footers:
 
 ### Simple fix without scope
 
-```
+```text
 fix: prevent race condition in auth flow
 ```
 
 ### Feature with scope and body
 
-```
+```text
 feat(api): add rate limiting to endpoints
 
 Implement token-bucket algorithm to prevent API abuse. Adds new
@@ -86,7 +86,7 @@ Closes #234
 
 ### Breaking change
 
-```
+```text
 feat(api)!: restructure authentication response
 
 BREAKING CHANGE: auth endpoint now returns JWT in response body

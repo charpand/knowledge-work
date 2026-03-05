@@ -1,27 +1,33 @@
 # Summarize Meeting into Decisions and Action Points
 
 ## Name
+
 Summarize Meeting into Decisions and Action Points
 
 ## Purpose
+
 Transforms raw meeting notes or recordings into a structured record of decisions made, commitments accepted, and follow-up work required. Provides clarity on what was decided versus what was discussed, clarifying accountability and preventing post-meeting confusion or scope creep.
 
 ## Inputs
 
 ### Required
+
 - Meeting notes (transcript, recording transcript, or written notes)
 - Meeting context (participants, stated objectives, date)
 - Stakeholder who will receive the summary
 
 ### Optional
+
 - Prior decisions or commitments referenced during meeting
 - Decision-making framework or approval authority used
 - Known constraints or precedent
 
 ## Referenced Skills
+
 - Define and Enforce a Quality Bar
 
 ## Process Constraints
+
 - Must distinguish between decisions (commitments to act or change) and discussions (exploration without commitment)
 - Must assign explicit ownership to each action (person/team, not "someone")
 - Must not interpret or infer decisions not explicitly stated; flag ambiguities
@@ -51,6 +57,7 @@ Format: Email-ready or shared document format, concise (under 1,000 words).
 ## Quality Checks
 
 Before delivery, validate:
+
 - [ ] Each decision is stated as a commitment, not a suggestion
 - [ ] Action items have named owners, not generic assignees
 - [ ] All timelines are specific (not "soon" or "ASAP")

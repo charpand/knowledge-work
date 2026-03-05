@@ -1,28 +1,34 @@
 # Review Policy Document for Risks, Gaps, and Assumptions
 
 ## Name
+
 Review Policy Document for Risks, Gaps, and Assumptions
 
 ## Purpose
+
 Conducts systematic analysis of policy documents to surface unintended consequences, logical contradictions, and unstated assumptions. Applied before policy adoption or rollout to reduce implementation friction and identify areas requiring clarification or additional controls.
 
 ## Inputs
 
 ### Required
+
 - Policy document (full text or structured outline)
 - Context on policy scope (who it affects, intended outcomes, timeline)
 - Current state baseline (existing related policies, organizational constraints)
 
 ### Optional
+
 - Historical precedent (how similar policies performed)
 - Stakeholder feedback or concerns to prioritize
 - Implementation environment constraints
 
 ## Referenced Skills
+
 - Define and Enforce a Quality Bar
 - Detect and Avoid Checkbox Participation
 
 ## Process Constraints
+
 - Review must identify gaps and risks systematically, not superficially
 - Must separate intentional policy design choices from unintended oversights
 - Must not recommend policy reversal or major restructuring; focus on gaps and risks only
@@ -48,6 +54,7 @@ Format: Structured document with clear sections and risk table, 1,500-2,500 word
 ## Quality Checks
 
 Before delivery, validate:
+
 - [ ] All identified gaps are traceable to specific policy language or logical flow
 - [ ] Risks follow explicit if-then logic, not speculation
 - [ ] Assumptions are stated neutrally (not as criticisms)
