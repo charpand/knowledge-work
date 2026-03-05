@@ -4,18 +4,18 @@
   "description": "Reusable documents and frameworks for knowledge work",
   "private": true,
   "engines": {
-    "node": "22.x",
+    "node": "25.x",
     "npm": "11.x"
   },
   "devDependencies": {
-    "markdownlint-cli2": "^0.15.1",
-    "@commitlint/cli": "^19.0.0",
-    "@commitlint/config-conventional": "^19.0.0",
+    "@commitlint/cli": "^20.4.3",
+    "@commitlint/config-conventional": "^20.4.3",
     "alex": "^11.0.0",
     "markdown-link-check": "^3.11.0",
-    "retext": "^8.1.0",
-    "retext-readability": "^6.0.0",
-    "retext-english": "^4.2.0"
+    "markdownlint-cli2": "^0.21.0",
+    "retext": "^9.0.0",
+    "retext-english": "^5.0.0",
+    "retext-readability": "^8.0.0"
   },
   "scripts": {
     "lint:markdown": "markdownlint-cli2 '**/*.md'",
