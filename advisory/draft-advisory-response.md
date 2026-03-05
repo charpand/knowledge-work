@@ -1,28 +1,34 @@
 # Draft Advisory Response to Policy or Proposal
 
 ## Name
+
 Draft Advisory Response to Policy or Proposal
 
 ## Purpose
+
 Provides structured guidance to stakeholders on a proposed policy, regulation, or organizational decision. Used when an organization seeks analytical perspective on potential impacts, risks, and implementation considerations before committing resources.
 
 ## Inputs
 
 ### Required
+
 - Policy or proposal document (text, PDF, or structured summary)
 - Stakeholder context (who requested the advisory, their decision timeline, constraints)
 - Scope of analysis (specific aspects to prioritize or exclude)
 
 ### Optional
+
 - Prior related decisions or policies for consistency checking
 - Historical outcomes from similar proposals
 - Budget or resource constraints
 
 ## Referenced Skills
+
 - Define and Enforce a Quality Bar
 - Terraform Design Review
 
 ## Process Constraints
+
 - Response must maintain neutral analytical tone, free of advocacy or preference
 - Must identify assumptions explicitly when information is incomplete
 - Must distinguish between risks, gaps in proposal, and implementation challenges
@@ -45,6 +51,7 @@ Format: Markdown document, approximately 2,000-3,000 words.
 ## Quality Checks
 
 Before delivery, validate:
+
 - [ ] Neutral tone maintained throughout; no advocacy present
 - [ ] All claims are traceable to proposal content or cited external reference
 - [ ] Risks are categorized by severity and clearly distinguish between likelihood and impact

@@ -15,11 +15,13 @@ This advisory establishes prescriptive standards for Go code style, project stru
 ## Code Style
 
 ### Formatting
+
 - **Mandatory**: Use `gofmt` for all code. Non-negotiable.
 - **Linting**: Enable `golangci-lint` with strict rules; configuration should include `gofmt`, `vet`, `errcheck`, `staticcheck`, and `misspell`.
 - **Line Length**: Soft limit 100 characters. Break long lines for readability.
 
 ### Naming Conventions
+
 - **Packages**: Lowercase, single word preferred (e.g., `config`, `storage`). Avoid plural or underscores.
 - **Exported Functions/Types**: `PascalCase` (e.g., `UserService`, `FetchUser`).
 - **Unexported Functions/Variables**: `camelCase` (e.g., `userService`, `fetchUser`).
@@ -27,6 +29,7 @@ This advisory establishes prescriptive standards for Go code style, project stru
 - **Constants**: `SCREAMING_SNAKE_CASE` for package-level constants; `CamelCase` within functions.
 
 ### Code Organization
+
 - Group related declarations together.
 - Place `const` and `var` declarations before function definitions.
 
@@ -34,7 +37,7 @@ This advisory establishes prescriptive standards for Go code style, project stru
 
 ## Project Structure
 
-```
+```text
 projectname/
 ├── cmd/
 │   ├── app1/
@@ -64,10 +67,12 @@ projectname/
 ## Comments and Documentation
 
 - **Exported Symbols**: Document all public functions, types, and methods with comments starting with the symbol name.
+
   ```go
   // UserService handles user operations.
   type UserService struct { ... }
   ```
+
 - **Unexported Code**: Comment non-obvious algorithms or complex logic.
 - **Package Documentation**: Include a package-level comment in `doc.go` or the primary package file.
 - **Example Code**: Include usage examples in package documentation for public APIs.
@@ -77,6 +82,7 @@ projectname/
 ## Testing
 
 - **Pattern**: Use table-driven tests for comprehensive coverage.
+
   ```go
   tests := []struct {
     name  string
@@ -89,6 +95,7 @@ projectname/
     t.Run(tt.name, func(t *testing.T) { ... })
   }
   ```
+
 - **Coverage**: Minimum 80% for libraries; 70% for applications.
 - **Naming**: Test files: `*_test.go`. Tests: `Test<FunctionName>` or `Test<Type>_<Method>`.
 - **Benchmarks**: Include benchmarks for performance-critical functions.
@@ -98,11 +105,13 @@ projectname/
 ## Error Handling
 
 - **Wrap Errors**: Use `fmt.Errorf("%w", err)` to add context while preserving the error chain.
+
   ```go
   if err != nil {
     return fmt.Errorf("failed to fetch user: %w", err)
   }
   ```
+
 - **Avoid Generics**: Never return a bare `error`; specify the error type or wrap with context.
 - **Sentinel Errors**: Use sparingly. Prefer error wrapping and type assertions for custom errors.
 - **No Silent Failures**: Always log or return errors; never ignore them.
@@ -121,17 +130,21 @@ projectname/
 ## Commit Conventions
 
 - **Message Format**: Imperative mood, clear subject line. Include issue/design references when applicable.
-  ```
+
+  ```text
   Implement user authentication service
 
   - Add JWT token validation
   - Implement session management
   - Fixes #123
   ```
+
 - **Co-authored-by**: When working with Copilot or in pair programming:
-  ```
+
+  ```text
   Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
   ```
+
 - **Atomic Commits**: One logical change per commit. Easy to review and revert if needed.
 
 ---
@@ -148,6 +161,7 @@ projectname/
 ## Trigger Language
 
 Use these phrases when requesting code review or standards compliance:
+
 - "Review this for Go style compliance"
 - "Check Go project structure"
 - "Validate Go testing standards"

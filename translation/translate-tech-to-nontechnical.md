@@ -1,28 +1,34 @@
 # Translate Technical Content to Non-Technical Explanation
 
 ## Name
+
 Translate Technical Content to Non-Technical Explanation
 
 ## Purpose
+
 Converts specialized or technical content into clear explanations for audiences without domain expertise. Applied when technical decisions, capabilities, or findings must be communicated to stakeholders, leadership, or external parties who lack the technical background to interpret the original material.
 
 ## Inputs
 
 ### Required
+
 - Technical content (article, documentation, code explanation, system design, research finding)
 - Target audience profile (role, domain, level of technical background)
 - Context on why this content matters to the audience
 
 ### Optional
+
 - Specific concepts that must be emphasized or de-emphasized
 - Prior knowledge the audience is assumed to have
 - Use cases or applications most relevant to audience
 
 ## Referenced Skills
+
 - Translate Technical Concepts to Non-Technical Audiences
 - Jip-en-Janneke Explanation Mode
 
 ## Process Constraints
+
 - Must not oversimplify to the point of inaccuracy; technical correctness is non-negotiable
 - Must use domain analogies familiar to the target audience, not generic metaphors
 - Must preserve uncertainty where it exists in original content (no false confidence)
@@ -45,6 +51,7 @@ Format: Narrative or visual explanation, 500-1,500 words depending on complexity
 ## Quality Checks
 
 Before delivery, validate:
+
 - [ ] Original technical content is accurately represented (no contradictions)
 - [ ] Analogies are drawn from audience's domain, not abstract or foreign
 - [ ] No unexplained technical terms appear in the text
