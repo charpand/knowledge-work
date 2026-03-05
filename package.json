@@ -22,7 +22,8 @@
     "lint:markdown:fix": "markdownlint-cli2 --fix '**/*.md'",
     "validate:content": "npm run validate:inclusive && npm run validate:links && npm run validate:readability",
     "validate:inclusive": "alex '**/*.md' --ignore-words ok,fail,failed,failures",
-    "validate:links": "markdown-link-check --quiet --config .markdown-link-check.json '**/*.md'",
-    "validate:readability": "node scripts/validate-readability.js"
+    "validate:links": "node scripts/validate-links.js",
+    "validate:readability": "node scripts/validate-readability.js",
+    "validate:skills": "node scripts/validate-skills.js"
   }
 }
