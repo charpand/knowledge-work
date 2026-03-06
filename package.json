@@ -18,8 +18,8 @@
     "retext-readability": "^8.0.0"
   },
   "scripts": {
-    "lint:markdown": "markdownlint-cli2 '**/*.md'",
-    "lint:markdown:fix": "markdownlint-cli2 --fix '**/*.md'",
+    "lint:markdown": "markdownlint-cli2 '**/*.md' '!./node_modules/**'",
+    "lint:markdown:fix": "markdownlint-cli2 --fix '**/*.md' '!./node_modules/**'",
     "validate:content": "npm run validate:inclusive && npm run validate:links && npm run validate:readability",
     "validate:inclusive": "alex advisory/*.md meetings/*.md review/*.md translation/*.md scripts/*.md .github/*.md",
     "validate:links": "node scripts/validate-links.js",

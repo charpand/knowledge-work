@@ -1,8 +1,0 @@
----
-# markdownlint configuration
-# https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
-
-default: true
-
-# MD013 - Line length: disable as long lines are common in documentation
-MD013: false
