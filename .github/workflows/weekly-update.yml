@@ -7,11 +7,11 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
+  issues: write
 
 jobs:
   update-check:
-    name: Apply Lint Fixes and Open PR
+    name: Apply Lint Fixes and Open Issue
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,17 +28,39 @@ jobs:
       - name: Auto-fix Markdown issues
         run: npm run lint:markdown:fix || true
 
-      - name: Open PR if changes were made
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: auto-fix markdown lint issues"
-          branch: automated/weekly-lint-fixes
-          delete-branch: true
-          title: "chore: weekly markdown lint fixes"
-          body: |
-            Automated weekly update check.
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
 
-            This PR contains automatic fixes applied by markdownlint-cli2.
-            Review and merge if the changes look correct.
-          reviewers: dsdeboer
+      - name: Commit and push fixes to branch
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B automated/weekly-lint-fixes
+          git add -A
+          git commit -m "chore: auto-fix markdown lint issues"
+          git push --force origin automated/weekly-lint-fixes
+
+      - name: Create issue for available lint fixes
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          existing=$(gh issue list --state open \
+            --search "chore: weekly markdown lint fixes available" \
+            --json number --jq '.[0].number')
+          if [ -z "$existing" ]; then
+            gh issue create \
+              --title "chore: weekly markdown lint fixes available" \
+              --body "Automated weekly lint fixes are available on branch \`automated/weekly-lint-fixes\`.
+
+          This branch contains automatic fixes applied by markdownlint-cli2.
+          Please review the branch and open a pull request if the changes look correct." \
+              --assignee dsdeboer
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
